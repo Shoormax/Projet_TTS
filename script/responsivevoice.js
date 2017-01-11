@@ -1187,8 +1187,6 @@ if (typeof responsiveVoice != 'undefined') {
 
         //Look for the voice in the system that matches the one in our collection
         self.getMatchedVoice = function(rv) {
-           setTimeout(function () {
-           }, 100);
             for (var i = 0; i < rv.voiceIDs.length; i++) {
                 var v = self.getSystemVoice(self.voicecollection[rv.voiceIDs[i]].name);
                 if (v != null)
@@ -1210,15 +1208,7 @@ if (typeof responsiveVoice != 'undefined') {
                     return self.systemvoices[i];
                 }
             }
-
-            //Not found by name. Try lang (iOS9) -- mixes up chrome voices with android voices
-            /*for (var i = 0; i < self.systemvoices.length; i++) {
-             if (self.systemvoices[i].lang == name)
-             return self.systemvoices[i];
-             }*/
-
             return null;
-
         }
 
         self.getResponsiveVoice = function(name) {

@@ -49,7 +49,6 @@ $(function () {
                 break;
 
             case 38: // up
-                console.log()
                 if(lastDomElement != null && lastDomElement.has().prev()){
                     active(lastDomElement.prev());
                 }
