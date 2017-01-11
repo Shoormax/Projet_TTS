@@ -1,6 +1,76 @@
 $(function () {
-    loadCss();
-    show_infos();
+    loadCss();      //load les éléments css grâce au JS afin de modifier dynamiquement les propriétés
+    show_infos();   //permet d'afficher le bouton pour afficher/cacher les images
+
+    var lastDomElement = null;
+
+    function active(domElement){
+        domElement.addClass("active");
+        if(lastDomElement != null){
+            lastDomElement.removeClass('active');
+        }
+        lastDomElement = domElement;
+        messageGenerator(domElement);
+    }
+
+    function messageGenerator(domElement){
+        var domTag = domElement[0].tagName;
+        var message;
+        switch(domTag){
+            case "UL":
+                message = "Ceci est une liste, appuyez sur la flèche de droite pour accéder à chacun des points de la liste.";
+                break;
+            case "P":
+                message = "Paragraphe. " + domElement.text();
+                break;
+            case "LI":
+                message = "élément d'une liste. " + domElement.text();
+                break;
+            default: return;
+        }
+        readMessage(message);
+    }
+
+    function readMessage(message){
+        responsiveVoice.speak(message, 'French Female');
+    }
+
+    $('p, li').click(function () {
+        active($(this));
+    });
+
+
+    $(document).keydown(function(e) {
+        switch(e.which) {
+            case 37: // left
+                if(lastDomElement != null && lastDomElement.has().parent()){
+                    active(lastDomElement.parent());
+                }
+                break;
+
+            case 38: // up
+                console.log()
+                if(lastDomElement != null && lastDomElement.has().prev()){
+                    active(lastDomElement.prev());
+                }
+                break;
+
+            case 39: // right
+                if(lastDomElement != null && lastDomElement.has().children()){
+                    active(lastDomElement.children().first());
+                }
+                break;
+
+            case 40: // down
+                if(lastDomElement != null && lastDomElement.has().next()){
+                    active(lastDomElement.next());
+                }
+                break;
+
+            default: return; // exit this handler for other keys
+        }
+        e.preventDefault(); // prevent the default action (scroll / move caret)
+    });
 });
 
 function add_element_to_body(element)
