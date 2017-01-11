@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,                    // Indique la version du manifest (toujours 2)
+  "name": "C MON EXTENSION A MWA",   // Le nom de votre extension
+  "description": "HUEHUEHUE",               // La description
+  "version": "1.0",                         // La version en en l'occurrence la première donc 1.0
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "notifications"
+  ],
+  "browser_action": {                       // Les paramètres
+    "default_popup": "html/popup.html"      // Le popup qui s'affichera quand vous cliquez sur l'îcone
+  },
+  "icons": {                                // L'îcone qui s'affichera lorse que vous êtes sur la page extensions des paramètre
+    "128" : "img/icon128.png"              // 128 = 128x128 la taille de votre image
+  },
+  "background": {
+    "scripts": ["script/script.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://www.google.com/*"],
+      "js": ["script/jquery.js", "script/script.js"]
+    }
+  ]
+}
