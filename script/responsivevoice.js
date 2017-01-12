@@ -8,7 +8,6 @@
 
 if (typeof responsiveVoice != 'undefined') {
     console.log('ResponsiveVoice already loaded');
-    console.log(responsiveVoice);
 } else {
 
     var ResponsiveVoice = function () {
@@ -473,24 +472,6 @@ if (typeof responsiveVoice != 'undefined') {
         self.tstCompiled = function(xy) { xy = 0; return eval("typeof x" + "y === 'undefined'"); }
 
         self.fallbackServicePath = 'https://code.responsivevoice.org/' + (self.tstCompiled()?'':'develop/') + 'getvoice.php';
-
-
-        //onvoiceschanged Deprecated: Only works on chrome and introduces glitches.
-        /*
-         //Wait until system voices are ready and trigger the event OnVoiceReady
-         if (typeof speechSynthesis != 'undefined') {
-         speechSynthesis.onvoiceschanged = function () {
-
-         self.systemvoices = window.speechSynthesis.getVoices();
-         console.log("OnVoiceReady - from onvoiceschanged");
-         // console.log(self.OnVoiceReady);
-         if (self.OnVoiceReady != null) {
-         self.OnVoiceReady.call();
-         }
-
-
-         };
-         }*/
 
         self.default_rv = self.responsivevoices[0];
 

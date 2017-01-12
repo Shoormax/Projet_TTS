@@ -39,6 +39,24 @@ $(function () {
         active($(this));
     });
 
+    $('html').mouseup(function() {
+        var text = getSelectedText();
+        if (text!=''){
+            responsiveVoice.speak(text);
+        }
+    });
+
+    function getSelectedText() {
+        if(window.getSelection()) {
+            return window.getSelection().toString();
+        }
+        else if (document.selection) {
+            return document.selection.createRange().text;
+        }
+        return '';
+    }
+
+
 
     $(document).keydown(function(e) {
         switch(e.which) {
