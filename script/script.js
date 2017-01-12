@@ -111,3 +111,20 @@ var hideImages = function hide_Images() {
 
     $('#hideImage').html($('#hideImage').html() == 'Cacher les images' ? 'Afficher les images' : 'Cacher les images');
 };
+
+$(window).load(function(){
+    console.log('Script chargé')
+    if (annyang) {
+        // On défini les phrases à prendre en charge
+        var commands = {
+            'hello': function() {
+                console.log('Salut les fermiers du web !');
+            }
+        };
+        // On initialise le script
+        annyang.init(commands);
+        // On démarre l'écoute
+        annyang.start();
+    }
+
+});
