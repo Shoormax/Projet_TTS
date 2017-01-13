@@ -71,28 +71,12 @@ $(function () {
         }
         e.preventDefault(); // prevent the default action (scroll / move caret)
     });
+    recognitionAnnyang();
 
 
-    if (annyang) {
-// Let's define a command.
-        var commands = {
-            'bonjour': function() { alert('Hello world!'); },
-            'what is your name': function(){alert('My name is Annyang');},
-            'I am *user' :function(user){alert('Hello '+user+ ' whatsup?')}
 
-        };
 
-// Initialize annyang with our commands
 
-        if(annyang.addCommands(commands)){
-            console;log('init ok')
-        };
-
-// Start listening.
-        annyang.init(commands);
-        annyang.start();
-
-    }
 });
 
 function add_element_to_body(element)
@@ -136,3 +120,37 @@ var hideImages = function hide_Images() {
     console.log(annyang)
 
 };
+
+function recognitionAnnyang() {
+
+    annyang.setLanguage('fr-FR');
+    if (annyang) {
+// Let's define a command.
+        var commands = {
+
+            'recherche *clef': function(clef) {
+                console.log('Annyang recherche'+clef);
+                window.location.replace('https://www.google.fr/?gfe_rd=cr&ei=8AB5WK3DCKnCXqaug9AK#='+clef);
+
+            },
+
+            'Recherche barack': function(){
+                alert('My name is Annyang');
+            },
+
+            'Bonjour je suis *user *users' :function(user, users)
+            {alert('Hello '+user+' '+users+ ' whatsup?');
+            },
+
+            'Bonjour je suis *user' :function(user){
+                alert('Hello '+user+ ' whatsup?');
+            }
+        };
+
+        annyang.addCommands(commands);
+        annyang.start();
+        annyang.debug();
+
+    }
+
+}
