@@ -13,7 +13,7 @@ function loadCss(isDyslexic)
         '* { color : #3b5998 !important;}'+ (isDyslexic ? '* { font-family: "OpenDyslexic-Regular" !important; }' : '') +
         'a { font-weight: bold !important; color: #100998; text-decoration: underline !important; }'+
         '.alt { font-size: 18px; }' +
-        '.noAlt{ color: #E80001; }';
+        '.noAlt{ color: #E80001 !important; }';
 
     document.head.appendChild(fa);
 }

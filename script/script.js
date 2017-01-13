@@ -3,6 +3,7 @@ $(function () {
     show_infos();   //permet d'afficher le bouton pour afficher/cacher les images
 
     var lastDomElement = null;
+    var srcCurrentImg = '';
 
     function active(domElement){
         domElement.addClass("active");
@@ -14,13 +15,13 @@ $(function () {
     }
 
     $('img').hover(function () {
-        var srcCurrentImg = '';
         if(typeof $(this).attr('alt') == 'undefined' || $(this).attr('alt') == '') {
             $(this).attr('alt', 'Aucune description trouvée pour cette image.');
         }
         srcCurrentImg = $(this).attr('src');
-       $(this).attr('src', '');
-       $(this).attr('srcset', '');
+        $(this).attr('src', '');
+        $(this).attr('srcset', '');
+        $(this).addClass('noAlt');
     },function () {
         $(this).attr('src', srcCurrentImg);
         $(this).attr('srcset', srcCurrentImg);
