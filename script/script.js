@@ -38,21 +38,7 @@ $(function () {
     $('p, li').click(function () {
         active($(this));
     });
-    // IMAGE RECOGNITION EN TEST
-    // $('img').hover(function () {
-    //     if(typeof $(this).attr('alt') == 'undefined' || $(this).attr('alt') == '') {
-    //         $(this).attr('alt', 'Aucune description trouvée pour cette image.');
-    //     }
-    //     srcCurrentImg = $(this).attr('src');
-    //     $(this).attr('src', '');
-    //     $(this).attr('srcset', '');
-    // },function () {
-    //     $(this).attr('src', srcCurrentImg);
-    //     $(this).attr('srcset', srcCurrentImg); });
-    // var Image = new ImageRecognition(srcCurrentImg);
-    // window.addEventListener("recognized", function (e) {
-    //     console.log(e.detail.result); // barack obama
-    // });
+
 
 
     $(document).keydown(function(e) {
@@ -103,7 +89,7 @@ $(function () {
         };
 
 // Start listening.
-
+        annyang.init(commands);
         annyang.start();
 
     }
