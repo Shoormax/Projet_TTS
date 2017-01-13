@@ -6,3 +6,4 @@
 .idea
 *.iml
 README.md
+node_modules

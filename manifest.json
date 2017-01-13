@@ -22,6 +22,7 @@
   "content_scripts": [
     {
       "matches": ["http://*/*","https://*/*"],
+      "exclude_matches" : ["http://monquartierconfluence.labo-g4.fr/BrowserVision/parametrage.html"],   //Permet de spécifier les fichiers sur lesquels on ne veut pas que l'extension soit implémentée
       "js": ["script/responsivevoice.min.js", "script/jquery.js", "script/css.js", "script/script.js"],
       "css": ["css/style.css"]
     }
