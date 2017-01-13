@@ -38,6 +38,21 @@ $(function () {
     $('p, li').click(function () {
         active($(this));
     });
+    // IMAGE RECOGNITION EN TEST
+    // $('img').hover(function () {
+    //     if(typeof $(this).attr('alt') == 'undefined' || $(this).attr('alt') == '') {
+    //         $(this).attr('alt', 'Aucune description trouvée pour cette image.');
+    //     }
+    //     srcCurrentImg = $(this).attr('src');
+    //     $(this).attr('src', '');
+    //     $(this).attr('srcset', '');
+    // },function () {
+    //     $(this).attr('src', srcCurrentImg);
+    //     $(this).attr('srcset', srcCurrentImg); });
+    // var Image = new ImageRecognition(srcCurrentImg);
+    // window.addEventListener("recognized", function (e) {
+    //     console.log(e.detail.result); // barack obama
+    // });
 
 
     $(document).keydown(function(e) {
@@ -70,6 +85,28 @@ $(function () {
         }
         e.preventDefault(); // prevent the default action (scroll / move caret)
     });
+
+
+    if (annyang) {
+// Let's define a command.
+        var commands = {
+            'bonjour': function() { alert('Hello world!'); },
+            'what is your name': function(){alert('My name is Annyang');},
+            'I am *user' :function(user){alert('Hello '+user+ ' whatsup?')}
+
+        };
+
+// Initialize annyang with our commands
+
+        if(annyang.addCommands(commands)){
+            console;log('init ok')
+        };
+
+// Start listening.
+
+        annyang.start();
+
+    }
 });
 
 function add_element_to_body(element)
@@ -110,21 +147,6 @@ var hideImages = function hide_Images() {
     })
 
     $('#hideImage').html($('#hideImage').html() == 'Cacher les images' ? 'Afficher les images' : 'Cacher les images');
+    console.log(annyang)
+
 };
-
-$(window).load(function(){
-    console.log('Script chargé')
-    if (annyang) {
-        // On défini les phrases à prendre en charge
-        var commands = {
-            'hello': function() {
-                console.log('Salut les fermiers du web !');
-            }
-        };
-        // On initialise le script
-        annyang.init(commands);
-        // On démarre l'écoute
-        annyang.start();
-    }
-
-});
