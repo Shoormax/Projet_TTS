@@ -23,7 +23,7 @@
     {
       "matches": ["http://*/*","https://*/*"],
       "js": ["script/responsivevoice.min.js", "script/jquery.js", "script/css.js", "script/script.js"],
-      "css": ["css/css.css", "css/style.css"]
+      "css": ["css/style.css"]
     }
   ],
   "web_accessible_resources": [
