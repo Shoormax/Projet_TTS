@@ -1,10 +1,42 @@
 <!DOCTYPE html>
-<script src="../script/jquery.js"></script>
-
+<html>
+<head>
+    <link rel="stylesheet" href="../css/css.css">
+    <script src="../script/jquery.js"></script>
     <style>
-        h1,p{
-            text-align:center
+        #status {
+            /* avoid an excessively wide status text */
+            max-width: 400px;
         }
     </style>
-    <h1>Bonjour</h1>
+</head>
+<body>
+<div id="status">
+    <table>
+        <tr>
+            <td>
+                <input id="cbDesactiver" type="checkbox">
+                <label for="cbDesactiver">Désactiver </label>
+            </td>
+        </tr>
+        </tr>
+            <td>
+                <a href="" onclick="">Configuration</a>
+            </td>
+        </tr>
+        </tr>
+        <td>
+            <a href="">A propos</a>
+        </td>
+        </tr>
+        <tr>
+            <td>
+                <span id="version">
+                    Browser Vision v1.0
+                </span>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
 </html>

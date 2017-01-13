@@ -1,9 +1,10 @@
 {
   "manifest_version": 2,                          // Indique la version du manifest (toujours 2)
-  "name": "C MON EXTENSION A MWA",                // Le nom de votre extension
-  "description": "HUEHUEHUE",                     // La description
+  "name": "Browser Vision",                       // Le nom de votre extension
+  "description": "Extension Google Chrome pour non-voyants et malvoyants",                     // La description
   "version": "1.0",                               // La version en en l'occurrence la première donc 1.0
   "permissions": [
+    "activeTab",
     "http://*/*",
     "https://*/*",
     "tabs",
@@ -16,13 +17,13 @@
     "128" : "img/logo_border_128.png"               // 128 = 128x128 la taille de votre image
   },
   "background": {
-    "scripts": ["script/script.js"]
+    "scripts": ["script/popup.js"]
   },
   "content_scripts": [
     {
       "matches": ["http://*/*","https://*/*"],
       "js": ["script/responsivevoice.min.js", "script/jquery.js", "script/css.js", "script/script.js"],
-      "css": ["css/style.css"]
+      "css": ["css/css.css", "css/style.css"]
     }
   ],
   "web_accessible_resources": [

@@ -13,6 +13,19 @@ $(function () {
         messageGenerator(domElement);
     }
 
+    $('img').hover(function () {
+        var srcCurrentImg = '';
+        if(typeof $(this).attr('alt') == 'undefined' || $(this).attr('alt') == '') {
+            $(this).attr('alt', 'Aucune description trouvée pour cette image.');
+        }
+        srcCurrentImg = $(this).attr('src');
+       $(this).attr('src', '');
+       $(this).attr('srcset', '');
+    },function () {
+        $(this).attr('src', srcCurrentImg);
+        $(this).attr('srcset', srcCurrentImg);
+    });
+
     function messageGenerator(domElement){
         var domTag = domElement[0].tagName;
         var message;
@@ -121,7 +134,7 @@ var hideImages = function hide_Images() {
             $(this).parent().children('.alt').remove()
         }
         else {
-            $(this).parent().append('<p class="alt">'+temp.alt+'</p>')
+            $(this).parent().append('<p class="alt">'+ typeof temp.alt == 'undefined' ? 'Aucune description n\'a été trouvée pour cette image' : temp.alt+'</p>')
         }
 
         $(this).toggle();
@@ -129,3 +142,17 @@ var hideImages = function hide_Images() {
 
     $('#hideImage').html($('#hideImage').html() == 'Cacher les images' ? 'Afficher les images' : 'Cacher les images');
 };
+
+function hoverImageAlt(image)
+{
+    var temp = this;
+
+    if($(this).parent().children('.alt').length) {
+        $(this).parent().children('.alt').remove()
+    }
+    else {
+        $(this).parent().append('<p class="alt">'+ typeof temp.alt == 'undefined' ? 'Aucune description n\'a été trouvée pour cette image' : temp.alt+'</p>')
+    }
+
+    $(this).toggle();
+}

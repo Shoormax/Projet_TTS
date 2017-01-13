@@ -12,7 +12,8 @@ function loadCss(isDyslexic)
         '.btn:hover { background-image: linear-gradient(to bottom, #3cb0fd, #3498db); text-decoration: none; }' +
         '* { color : #3b5998 !important;}'+ (isDyslexic ? '* { font-family: "OpenDyslexic-Regular" !important; }' : '') +
         'a { font-weight: bold !important; color: #100998; text-decoration: underline !important; }'+
-        '.alt { font-size: 18px; }';
+        '.alt { font-size: 18px; }' +
+        '.noAlt{ color: #E80001; }';
 
     document.head.appendChild(fa);
 }

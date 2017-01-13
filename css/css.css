@@ -1,0 +1,27 @@
+html, body {
+    font-size: 1em;
+}
+
+h1,p{
+    text-align:center
+}
+
+td {
+    border-bottom: 1px solid #959595;
+    padding: 15px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+#version {
+    color: grey;
+    white-space: nowrap;
+}
