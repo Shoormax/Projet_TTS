@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../css/css.css">
-    <script src="../script/jquery.js"></script>
 </head>
 <body>
 <div id="status">
@@ -14,14 +12,31 @@
                 <label for="cbDesactiver">Désactiver </label>
             </td>
         </tr>
-        </tr>
+        <tr>
             <td>
-                <button class="btn" onclick="">Configuration</button>
+                <button id="btnConfig" class="btn">Configuration</button>
             </td>
         </tr>
-        </tr>
+        <tr>
         <td>
-            <button class="btn" onclick="">A propos</button>
+            <button id="btnApropos" class="btn">A propos</button>
+            <div id="aPropos">
+                Team BrowserVision
+                <ul>
+                    <li>
+                        Duthoit Pierre-Louis
+                    </li>
+                    <li>
+                        Dérudet Valentin
+                    </li>
+                    <li>
+                        Vincent Thomas
+                    </li>
+                    <li>
+                        Comenda Dimitri
+                    </li>
+                </ul>
+            </div>
         </td>
         </tr>
         <tr>
@@ -34,4 +49,6 @@
     </table>
 </div>
 </body>
+<script src="../script/jquery.js"></script>
+<script src="../script/popup.js"></script>
 </html>

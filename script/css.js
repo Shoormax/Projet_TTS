@@ -1,3 +1,7 @@
+/**
+ * Méthode permet de créer le css en JS afin de le modifier en récupérant les valeur du localstorage
+* @param isDyslexic
+*/
 function loadCss(isDyslexic)
 {
     var fa = document.createElement('style');
@@ -13,7 +17,10 @@ function loadCss(isDyslexic)
         '* { color : #3b5998 !important;}'+ (isDyslexic ? '* { font-family: "OpenDyslexic-Regular" !important; }' : '') +
         'a { font-weight: bold !important; color: #100998; text-decoration: underline !important; }'+
         '.alt { font-size: 18px; }' +
-        '.noAlt{ color: #E80001 !important; }';
+        //Si une image n'a pas de "alt" on rajouter une phrase avec ce css
+        '.noAlt{ color: #E80001 !important; }' +
+        //Edit la sélection de texte de l'utilisateur
+        '::selection {background: #ffb7b7; }';
 
     document.head.appendChild(fa);
 }
