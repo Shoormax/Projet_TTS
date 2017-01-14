@@ -22,7 +22,7 @@ $(function () {
         loadCss();      //load les éléments css grâce au JS afin de modifier dynamiquement les propriétés
 
         var lastDomElement = null;
-        if(sessionStorage.getItem("lectureVocale") == 'true')
+        if(typeof sessionStorage.getItem("lectureVocale") != "undefined" && sessionStorage.getItem("lectureVocale") == 'true')
         {
             function active(domElement){
                 domElement.addClass("active");
@@ -125,7 +125,7 @@ $(function () {
             $('#hideImage').html($('#hideImage').html() == 'Cacher les images' ? 'Afficher les images' : 'Cacher les images');
         };
 
-        if(sessionStorage.getItem('affichageImages') == 'false') {
+        if(typeof sessionStorage.getItem('affichageImages') != "undefined" && sessionStorage.getItem('affichageImages') == 'false') {
             hideImages();
         }
 
