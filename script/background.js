@@ -9,12 +9,10 @@ $(function () {
         $('#cbMalVoyant').prop('checked', profil == 2);
         $('#cbPerso').prop('checked', profil == 3);
 
-        var storage = getStorage();
-
-        $('#lectureVocale').attr('checked', $.parseJSON(storage['lectureVocale']));
-        $('#controleVocal').attr('checked', $.parseJSON(storage['controleVocal']));
-        $('#affichageImages').attr('checked', $.parseJSON(storage['affichageImages']));
-        $('#isDyslexic').attr('checked', $.parseJSON(storage['isDyslexic']));
+        $('#lectureVocale').prop('checked', cocheCheckBox(sessionStorage.getItem('lectureVocale')));
+        $('#controleVocal').prop('checked', cocheCheckBox(sessionStorage.getItem('controleVocal')));
+        $('#affichageImages').prop('checked', cocheCheckBox(sessionStorage.getItem('affichageImages')));
+        $('#isDyslexic').prop('checked', cocheCheckBox(sessionStorage.getItem('isDyslexic')));
         changeCheckBox(profil != 3 ? true : false);
     }
 });
@@ -23,7 +21,7 @@ $('#cbNonVoyant').click(function () {
     $('#lectureVocale').prop('checked', 'checked');
     $('#controleVocal').prop('checked', 'checked');
     $('#affichageImages').prop('checked', '');
-    $('#isDyslexic').prop('checked', verifExist(sessionStorage.getItem('isDyslexic'), '', true));
+    $('#isDyslexic').prop('checked', cocheCheckBox(sessionStorage.getItem('isDyslexic')));
     changeCheckBox(true);
 });
 
@@ -31,15 +29,15 @@ $('#cbMalVoyant').click(function () {
     $('#lectureVocale').prop('checked', '');
     $('#controleVocal').prop('checked', '');
     $('#affichageImages').prop('checked', 'checked');
-    $('#isDyslexic').prop('checked', verifExist(sessionStorage.getItem('isDyslexic'), '', true));
+    $('#isDyslexic').prop('checked', cocheCheckBox(sessionStorage.getItem('isDyslexic')));
     changeCheckBox(true);
 });
 
 $('#cbPerso').click(function () {
-    $('#lectureVocale').prop('checked', verifExist(sessionStorage.getItem('lectureVocale'), '', true));
-    $('#controleVocal').prop('checked', verifExist(sessionStorage.getItem('controleVocal'), '', true));
-    $('#affichageImages').prop('checked', verifExist(sessionStorage.getItem('affichageImages'), '', true));
-    $('#isDyslexic').prop('checked', verifExist(sessionStorage.getItem('isDyslexic'), '', true));
+    $('#lectureVocale').prop('checked', cocheCheckBox(sessionStorage.getItem('lectureVocale')));
+    $('#controleVocal').prop('checked', cocheCheckBox(sessionStorage.getItem('controleVocal')));
+    $('#affichageImages').prop('checked', cocheCheckBox(sessionStorage.getItem('affichageImages')));
+    $('#isDyslexic').prop('checked', cocheCheckBox(sessionStorage.getItem('isDyslexic')));
     changeCheckBox(false);
 });
 
@@ -125,14 +123,16 @@ function getStorage() {
  * @param isCheckBox
  * @returns {string|*}
  */
-function verifExist(variable, defaultVal, isCheckBox)
+function verifExist(variable, defaultVal)
 {
     defaultVal = typeof defaultVal == 'undefined' ? 'true' : defaultVal;
 
-    return typeof isCheckBox == "undefined" ?
-        typeof variable == 'undefined' || variable == null || variable == '' ? defaultVal : variable
-        :
-        typeof variable == 'undefined' || variable == null || variable == '' || variable == 'false' ? defaultVal : 'checked';
+    return typeof variable == 'undefined' || variable == null || variable == '' ? defaultVal : variable;
+}
+
+function cocheCheckBox(variable)
+{
+    return variable == 'true' || variable == true ? true : false;
 }
 
 var portFromCS;

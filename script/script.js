@@ -1,7 +1,5 @@
-/*
- * $("a").click(function(e) { e.preventDefault(); });
- * Empeche l'action d'un lien cliqué
- */
+console.log(chrome);
+
 var myPort = chrome.runtime.connect({name:"port-from-cs"});
 
 myPort.onMessage.addListener(function(m) {
@@ -16,9 +14,9 @@ $(function () {
         }
     );
 
-    var isActive = verifVal(sessionStorage.getItem("active"));
+    var isActive = existe(sessionStorage.getItem("active"));
 
-    if(isActive == 'true') {
+    if(isActive) {
         loadCss();      //load les éléments css grâce au JS afin de modifier dynamiquement les propriétés
 
         var lastDomElement = null;
