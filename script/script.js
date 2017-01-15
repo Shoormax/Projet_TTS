@@ -16,13 +16,13 @@ $(function () {
         }
     );
 
-    var isActive = sessionStorage.getItem("active") == null || sessionStorage.getItem("active") == 'undefined' || sessionStorage.getItem("active") == '' ? true : sessionStorage.getItem("active");
+    var isActive = verifExist(sessionStorage.getItem("active"));
 
     if(isActive == 'true') {
         loadCss();      //load les éléments css grâce au JS afin de modifier dynamiquement les propriétés
 
         var lastDomElement = null;
-        if(typeof sessionStorage.getItem("lectureVocale") != "undefined" && sessionStorage.getItem("lectureVocale") == 'true')
+        if(verifExist(sessionStorage.getItem("lectureVocale")))
         {
             function active(domElement){
                 domElement.addClass("active");
@@ -108,7 +108,7 @@ $(function () {
             });
         }
 
-        if(typeof sessionStorage.getItem('affichageImages') != "undefined" && sessionStorage.getItem('affichageImages') == 'false') {
+        if(verifExist(sessionStorage.getItem('affichageImages'), 'false')) {
             function hide_Images() {
                 $("img").each(function () {
                     var temp = this;
@@ -117,7 +117,7 @@ $(function () {
                         $(this).parent().children('.alt').remove()
                     }
                     else {
-                        $(this).parent().append('<p class="alt">'+ typeof temp.alt == 'undefined' ? 'Aucune description n\'a été trouvée pour cette image' : temp.alt+'</p>')
+                        $(this).parent().append('<p class="alt">'+ verifExist(temp.alt, 'Aucune description n\'a été trouvée pour cette image')+'</p>')
                     }
 
                     $(this).toggle();
@@ -149,7 +149,7 @@ $(function () {
             var href = $(this).attr('href');
             e.preventDefault();
             var allow;
-            if(typeof sessionStorage.getItem('affichageImages') != "undefined" && sessionStorage.getItem('affichageImages') == 'false') {
+            if(verifExist(sessionStorage.getItem('affichageImages'), 'false')) {
                 readMessage('Vous venez de cliquer sur un lien, êtes vous sur de vouloir le suivre ?');
             }
 
@@ -172,4 +172,17 @@ function setStorageParams(params)
             sessionStorage.setItem(i, val[i]);
         }
     });
+}
+
+/**
+ * Verifie qu'une variable existe
+ *
+ * @param variable
+ * @param defaultVal (optional) (default = true)
+ * @returns {boolean|*}
+ */
+function verifExist(variable, defaultVal)
+{
+    defaultVal = typeof defaultVal == 'undefined' ? 'true' : defaultVal;
+    return variable == 'undefined' || variable == null || variable == '' ? defaultVal : variable;
 }
