@@ -14,33 +14,46 @@ $(function () {
         $('#lectureVocale').attr('checked', $.parseJSON(storage['lectureVocale']));
         $('#controleVocal').attr('checked', $.parseJSON(storage['controleVocal']));
         $('#affichageImages').attr('checked', $.parseJSON(storage['affichageImages']));
+        $('#isDyslexic').attr('checked', $.parseJSON(storage['isDyslexic']));
         changeCheckBox(profil != 3 ? true : false);
     }
 });
 
 $('#cbNonVoyant').click(function () {
-    $('#lectureVocale').attr('checked', true);
-    $('#controleVocal').attr('checked', true);
-    $('#affichageImages').attr('checked', false);
+    $('#lectureVocale').prop('checked', 'checked');
+    $('#controleVocal').prop('checked', 'checked');
+    $('#affichageImages').prop('checked', '');
+    $('#isDyslexic').prop('checked', verifExist(sessionStorage.getItem('isDyslexic'), '', true));
     changeCheckBox(true);
 });
 
 $('#cbMalVoyant').click(function () {
-    $('#lectureVocale').attr('checked', false);
-    $('#controleVocal').attr('checked', false);
-    $('#affichageImages').attr('checked', true);
+    $('#lectureVocale').prop('checked', '');
+    $('#controleVocal').prop('checked', '');
+    $('#affichageImages').prop('checked', 'checked');
+    $('#isDyslexic').prop('checked', verifExist(sessionStorage.getItem('isDyslexic'), '', true));
     changeCheckBox(true);
 });
 
 $('#cbPerso').click(function () {
+    $('#lectureVocale').prop('checked', verifExist(sessionStorage.getItem('lectureVocale'), '', true));
+    $('#controleVocal').prop('checked', verifExist(sessionStorage.getItem('controleVocal'), '', true));
+    $('#affichageImages').prop('checked', verifExist(sessionStorage.getItem('affichageImages'), '', true));
+    $('#isDyslexic').prop('checked', verifExist(sessionStorage.getItem('isDyslexic'), '', true));
     changeCheckBox(false);
 });
 
+/**
+ * Permet de set l'état des checkboxs
+ *
+ * @param disabled
+ */
 function changeCheckBox(disabled) {
     $('#lectureVocale').attr('disabled', disabled);
     $('#controleVocal').attr('disabled', disabled);
     $('#affichageImages').attr('disabled', disabled);
 }
+
 /**
  * Permet d'enregistrer les propriétés choisies
  */
@@ -70,18 +83,21 @@ function setStorage(profil) {
         sessionStorage.setItem("lectureVocale", true);
         sessionStorage.setItem("controleVocal", true);
         sessionStorage.setItem("affichageImages", false);
+        sessionStorage.setItem("isDyslexic", $('#isDyslexic').is(':checked'));
         sessionStorage.setItem("profil", profil);
     }
     else if(profil == 2) {
         sessionStorage.setItem("lectureVocale", false);
         sessionStorage.setItem("controleVocal", false);
         sessionStorage.setItem("affichageImages", true);
+        sessionStorage.setItem("isDyslexic", $('#isDyslexic').is(':checked'));
         sessionStorage.setItem("profil", profil);
     }
     else {
         sessionStorage.setItem("lectureVocale", $('#lectureVocale').is(':checked'));
         sessionStorage.setItem("controleVocal", $('#controleVocal').is(':checked'));
         sessionStorage.setItem("affichageImages", $('#affichageImages').is(':checked'));
+        sessionStorage.setItem("isDyslexic", $('#isDyslexic').is(':checked'));
         sessionStorage.setItem("profil", profil);
     }
 }
@@ -95,8 +111,28 @@ function getStorage() {
     return {
         'lectureVocale' : sessionStorage.getItem("lectureVocale"),
         'controleVocal' : sessionStorage.getItem("controleVocal"),
-        'affichageImages' : sessionStorage.getItem("affichageImages")
+        'affichageImages' : sessionStorage.getItem("affichageImages"),
+        'isDyslexic' : sessionStorage.getItem("isDyslexic")
     };
+}
+
+
+/**
+ * Verifie qu'une variable existe
+ *
+ * @param variable
+ * @param defaultVal
+ * @param isCheckBox
+ * @returns {string|*}
+ */
+function verifExist(variable, defaultVal, isCheckBox)
+{
+    defaultVal = typeof defaultVal == 'undefined' ? 'true' : defaultVal;
+
+    return typeof isCheckBox == "undefined" ?
+        typeof variable == 'undefined' || variable == null || variable == '' ? defaultVal : variable
+        :
+        typeof variable == 'undefined' || variable == null || variable == '' || variable == 'false' ? defaultVal : 'checked';
 }
 
 var portFromCS;

@@ -16,13 +16,13 @@ $(function () {
         }
     );
 
-    var isActive = verifExist(sessionStorage.getItem("active"));
+    var isActive = verifVal(sessionStorage.getItem("active"));
 
     if(isActive == 'true') {
         loadCss();      //load les éléments css grâce au JS afin de modifier dynamiquement les propriétés
 
         var lastDomElement = null;
-        if(verifExist(sessionStorage.getItem("lectureVocale")))
+        if(existe(sessionStorage.getItem("lectureVocale")))
         {
             function active(domElement){
                 domElement.addClass("active");
@@ -108,7 +108,7 @@ $(function () {
             });
         }
 
-        if(verifExist(sessionStorage.getItem('affichageImages'), 'false')) {
+        if(existe(sessionStorage.getItem('affichageImages'), false)) {
             function hide_Images() {
                 $("img").each(function () {
                     var temp = this;
@@ -117,7 +117,7 @@ $(function () {
                         $(this).parent().children('.alt').remove()
                     }
                     else {
-                        $(this).parent().append('<p class="alt">'+ verifExist(temp.alt, 'Aucune description n\'a été trouvée pour cette image')+'</p>')
+                        $(this).parent().append('<p class="alt">'+ verifVal(temp.alt, 'Aucune description n\'a été trouvée pour cette image')+'</p>')
                     }
 
                     $(this).toggle();
@@ -149,7 +149,7 @@ $(function () {
             var href = $(this).attr('href');
             e.preventDefault();
             var allow;
-            if(verifExist(sessionStorage.getItem('affichageImages'), 'false')) {
+            if(existe(sessionStorage.getItem('lectureVocale'))) {
                 readMessage('Vous venez de cliquer sur un lien, êtes vous sur de vouloir le suivre ?');
             }
 
@@ -164,6 +164,11 @@ $(function () {
     }
 });
 
+/**
+ * Permet de set le storage par rapport aux données reçues
+ *
+ * @param params
+ */
 function setStorageParams(params)
 {
     Object.keys(params).map(function(key, index) {
@@ -172,17 +177,37 @@ function setStorageParams(params)
             sessionStorage.setItem(i, val[i]);
         }
     });
+    console.log(existe(sessionStorage.getItem("lectureVocale")));
 }
 
 /**
- * Verifie qu'une variable existe
+ * Verifie la valeur d'une variable
  *
  * @param variable
  * @param defaultVal (optional) (default = true)
  * @returns {boolean|*}
  */
-function verifExist(variable, defaultVal)
+function verifVal(variable, defaultVal)
 {
     defaultVal = typeof defaultVal == 'undefined' ? 'true' : defaultVal;
-    return variable == 'undefined' || variable == null || variable == '' ? defaultVal : variable;
+    return typeof variable == 'undefined' || variable == null || variable == '' ? defaultVal : variable;
+}
+
+/**
+ * Verifie qu'une variable existe
+ * 
+ * @param variable
+ * @param defaultVal
+ * @returns {boolean}
+ */
+function existe(variable, defaultVal)
+{
+    if(variable == 'false' || variable == 'true') {
+        variable = $.parseJSON(variable);
+    }
+    if(typeof defaultVal == 'undefined') {
+        defaultVal =  true;
+    }
+
+    return variable == defaultVal;
 }
