@@ -108,25 +108,25 @@ $(function () {
             });
         }
 
-        var hideImages = function hide_Images() {
-            $("img").each(function () {
-                var temp = this;
-
-                if($(this).parent().children('.alt').length) {
-                    $(this).parent().children('.alt').remove()
-                }
-                else {
-                    $(this).parent().append('<p class="alt">'+ typeof temp.alt == 'undefined' ? 'Aucune description n\'a été trouvée pour cette image' : temp.alt+'</p>')
-                }
-
-                $(this).toggle();
-            })
-
-            $('#hideImage').html($('#hideImage').html() == 'Cacher les images' ? 'Afficher les images' : 'Cacher les images');
-        };
-
         if(typeof sessionStorage.getItem('affichageImages') != "undefined" && sessionStorage.getItem('affichageImages') == 'false') {
-            hideImages();
+            function hide_Images() {
+                $("img").each(function () {
+                    var temp = this;
+
+                    if($(this).parent().children('.alt').length) {
+                        $(this).parent().children('.alt').remove()
+                    }
+                    else {
+                        $(this).parent().append('<p class="alt">'+ typeof temp.alt == 'undefined' ? 'Aucune description n\'a été trouvée pour cette image' : temp.alt+'</p>')
+                    }
+
+                    $(this).toggle();
+                })
+
+                $('#hideImage').html($('#hideImage').html() == 'Cacher les images' ? 'Afficher les images' : 'Cacher les images');
+            };
+
+            hide_Images();
         }
 
         //Lorsque l'on survole une image, elle disparait pour laisser apparaitre la balise alt
@@ -143,6 +143,23 @@ $(function () {
         },function () {
             $(this).attr('src', temp);
             $(this).attr('srcset', temp);
+        });
+
+        $("a").click(function(e) {
+            var href = $(this).attr('href');
+            e.preventDefault();
+            var allow;
+            if(typeof sessionStorage.getItem('affichageImages') != "undefined" && sessionStorage.getItem('affichageImages') == 'false') {
+                readMessage('Vous venez de cliquer sur un lien, êtes vous sur de vouloir le suivre ?');
+            }
+
+            setTimeout(function () {
+                allow = confirm('Vous venez de cliquer sur un lien, êtes vous sur de vouloir le suivre ?');
+                if (allow) {
+                    responsiveVoice.cancel();
+                    window.location.href = href;
+                }
+            });
         });
     }
 });
