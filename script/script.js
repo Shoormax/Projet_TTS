@@ -1,5 +1,3 @@
-console.log(chrome);
-
 var myPort = chrome.runtime.connect({name:"port-from-cs"});
 
 myPort.onMessage.addListener(function(m) {
@@ -177,7 +175,6 @@ function setStorageParams(params)
             sessionStorage.setItem(i, val[i]);
         }
     });
-    console.log(existe(sessionStorage.getItem("lectureVocale")));
 }
 
 /**

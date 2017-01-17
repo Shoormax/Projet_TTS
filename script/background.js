@@ -13,7 +13,10 @@ $(function () {
         $('#controleVocal').prop('checked', cocheCheckBox(sessionStorage.getItem('controleVocal')));
         $('#affichageImages').prop('checked', cocheCheckBox(sessionStorage.getItem('affichageImages')));
         $('#isDyslexic').prop('checked', cocheCheckBox(sessionStorage.getItem('isDyslexic')));
-        changeCheckBox(profil != 3 ? true : false);
+        changeCheckBox(profil != 3);
+    }
+    else {
+        $('#cbPerso').prop('checked', true);
     }
 });
 

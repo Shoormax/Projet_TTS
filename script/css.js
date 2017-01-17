@@ -1,7 +1,6 @@
 /**
  * Méthode permet de créer le css en JS afin de le modifier en récupérant les valeur du localstorage
-* @param isDyslexic
-*/
+ */
 function loadCss()
 {
     var fa = document.createElement('style');
