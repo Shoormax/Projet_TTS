@@ -1,0 +1,73 @@
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../css/backgournd.css">
+    <title>
+        BrowserVision - Paramètrage
+    </title>
+</head>
+<body>
+<div id="titreConfiguration">
+    <i id="materialSettings" class="material-icons">settings</i><span id="titre">Paramétrage</span>
+</div>
+<hr>
+<div id="container">
+    <span class="titreParties">Choisir un mode :</span>
+    <ul>
+        <li>
+            <input type="radio" id="cbNonVoyant" name="selector">
+            <label for="cbNonVoyant">Non-voyant</label>
+
+            <div class="check"></div>
+        </li>
+
+        <li>
+            <input type="radio" id="cbMalVoyant" name="selector">
+            <label for="cbMalVoyant">Malvoyant</label>
+
+            <div class="check"><div class="inside"></div></div>
+        </li>
+
+        <li>
+            <input type="radio" id="cbPerso" name="selector">
+            <label for="cbPerso">Personnalisé</label>
+
+            <div class="check"><div class="inside"></div></div>
+        </li>
+    </ul>
+    <span class="titreParties">Configuration :</span>
+    <div class="choixParamCb">
+        <div class="cbConfig">
+            <input class="checkboxes" type="checkbox" value="None" id="lectureVocale" name="check" />
+            <label for="lectureVocale"></label>
+        </div>
+        <span class="describConfig">Lecture vocale du texte</span>
+    </div>
+    <div class="choixParamCb">
+        <div class="cbConfig">
+            <input class="checkboxes" type="checkbox" value="None" id="controleVocal" name="check" />
+            <label for="controleVocal"></label>
+        </div>
+        <span class="describConfig">Contrôle vocal des actions</span>
+    </div>
+    <div class="choixParamCb">
+        <div class="cbConfig">
+            <input class="checkboxes" type="checkbox" value="None" id="affichageImages" name="check" />
+            <label for="affichageImages"></label>
+        </div>
+        <span class="describConfig">Affichage des images</span>
+    </div>
+    <div class="choixParamCb">
+        <div class="cbConfig">
+            <input class="checkboxes" type="checkbox" value="None" id="isDyslexic" name="check" />
+            <label for="isDyslexic"></label>
+        </div>
+        <span class="describConfig">Mode dyslexique</span>
+    </div>
+    <button id="btnSave">Enregistrer les paramètres</button>
+</div>
+</body>
+<script src="../script/jquery.js"></script>
+<script src="../script/background.js"></script>
+</html>
