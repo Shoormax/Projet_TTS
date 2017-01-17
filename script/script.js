@@ -24,25 +24,42 @@ $(function () {
                 domElement.addClass("active");
                 if(lastDomElement != null){
                     lastDomElement.removeClass('active');
+                    responsiveVoice.cancel();
                 }
                 lastDomElement = domElement;
                 messageGenerator(domElement);
             }
 
-            function messageGenerator(domElement){
+            function messageGenerator(domElement) {
                 var domTag = domElement[0].tagName;
                 var message;
-                switch(domTag){
+                switch (domTag) {
+                    case "A":
+                        message = "Lien pointant vers :" + domElement.text() + ". Appuyez sur entrée pour être redirigé.";
+                        break;
                     case "UL":
-                        message = "Ceci est une liste, appuyez sur la flèche de droite pour accéder à chacun des points de la liste.";
+                        message = "Ceci est une liste de " + domElement.children().length + " éléments, appuyez sur la flèche de droite pour accéder à chacun.";
                         break;
                     case "P":
                         message = "Paragraphe. " + domElement.text();
                         break;
                     case "LI":
-                        message = "élément d'une liste. " + domElement.text();
+                        message = "élément " + (domElement.index() + 1) + ". " + domElement.text();
                         break;
-                    default: return;
+                    case "H1":
+                        message = "Titre de niveau 1. " + domElement.text();
+                        break;
+                    case "H2":
+                        message = "Titre de niveau 2. " + domElement.text();
+                        break;
+                    case "H3":
+                        message = domElement.text();
+                        break;
+                    case "H4":
+                        message = domElement.text();
+                        break;
+                    default:
+                        return;
                 }
                 readMessage(message);
             }
@@ -51,56 +68,73 @@ $(function () {
                 responsiveVoice.speak(message, 'French Female');
             }
 
-            $('p, li').click(function () {
+            $('p, li, ul, h1, h2, h3, h4').click(function () {
                 active($(this));
             });
 
-            $('html').mouseup(function() {
-                var text = getSelectedText();
-                if (text!=''){
-                    responsiveVoice.speak(text);
-                }
+            $('body a').click(function (event) {
+                event.preventDefault(); // empêche la redirection du lien
+                active($(this));
             });
 
-            function getSelectedText() {
-                if(window.getSelection()) {
-                    return window.getSelection().toString();
-                }
-                else if (document.selection) {
-                    return document.selection.createRange().text;
-                }
-                return '';
-            }
+            // $('html').mouseup(function() {
+            //     var text = getSelectedText();
+            //     if (text!=''){
+            //         responsiveVoice.speak(text);
+            //     }
+            // });
+            //
+            // function getSelectedText() {
+            //     if(window.getSelection()) {
+            //         return window.getSelection().toString();
+            //     }
+            //     else if (document.selection) {
+            //         return document.selection.createRange().text;
+            //     }
+            //     return '';
+            // }
 
-            $(document).keydown(function(e) {
-                switch(e.which) {
+            $(document).keydown(function (e) {
+                switch (e.which) {
+                    case 13: // enter
+                        // L'utilisateur confirme qu'il veut aller sur le lien
+                        if (lastDomElement[0].tagName == "A") {
+                            window.location = lastDomElement.attr("href"); // redirige vers la cible du lien
+                        }
+                        break;
+
+                    case 27: // escape
+                        responsiveVoice.cancel();
+                        break;
+
                     case 37: // left
-                        if(lastDomElement != null && lastDomElement.has().parent()){
+                        if (lastDomElement != null && lastDomElement.has().parent()) {
                             active(lastDomElement.parent());
                         }
                         break;
 
                     case 38: // up
-                        if(lastDomElement != null && lastDomElement.has().prev()){
+                        if (lastDomElement != null && lastDomElement.has().prev()) {
                             active(lastDomElement.prev());
                         }
                         break;
 
                     case 39: // right
-                        if(lastDomElement != null && lastDomElement.has().children()){
+                        if (lastDomElement != null && lastDomElement.has().children()) {
                             active(lastDomElement.children().first());
                         }
                         break;
 
                     case 40: // down
-                        if(lastDomElement != null && lastDomElement.has().next()){
+                        if (lastDomElement != null && lastDomElement.has().next()) {
                             active(lastDomElement.next());
                         }
                         break;
 
-                    default: return; // exit this handler for other keys
+                    default:
+                        return;
                 }
-                e.preventDefault(); // prevent the default action (scroll / move caret)
+                e.preventDefault();
             });
         }
 
@@ -141,22 +175,22 @@ $(function () {
             $(this).attr('srcset', temp);
         });
 
-        $("a").click(function(e) {
-            var href = $(this).attr('href');
-            e.preventDefault();
-            var allow;
-            if(existe(sessionStorage.getItem('lectureVocale'))) {
-                readMessage('Vous venez de cliquer sur un lien, êtes vous sur de vouloir le suivre ?');
-            }
-
-            setTimeout(function () {
-                allow = confirm('Vous venez de cliquer sur un lien, êtes vous sur de vouloir le suivre ?');
-                if (allow) {
-                    responsiveVoice.cancel();
-                    window.location.href = href;
-                }
-            });
-        });
+        // $("a").click(function(e) {
+        //     var href = $(this).attr('href');
+        //     e.preventDefault();
+        //     var allow;
+        //     if(existe(sessionStorage.getItem('lectureVocale'))) {
+        //         readMessage('Vous venez de cliquer sur un lien, êtes vous sur de vouloir le suivre ?');
+        //     }
+        //
+        //     setTimeout(function () {
+        //         allow = confirm('Vous venez de cliquer sur un lien, êtes vous sur de vouloir le suivre ?');
+        //         if (allow) {
+        //             responsiveVoice.cancel();
+        //             window.location.href = href;
+        //         }
+        //     });
+        // });
     }
     $(window).on('beforeunload',annyangChargementPage());
     controleVocale();
