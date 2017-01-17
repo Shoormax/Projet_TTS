@@ -257,9 +257,7 @@ annyang.debug();
 
          },
           "page" : function () {
-
              responsiveVoice.speak($(document).attr('title'),"French Female");
-
          }
 
        };
