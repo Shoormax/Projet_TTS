@@ -58,7 +58,7 @@ $(function () {
             $('html').mouseup(function() {
                 var text = getSelectedText();
                 if (text!=''){
-                    responsiveVoice.speak(text);
+                    readMessage(text);
                 }
             });
 
