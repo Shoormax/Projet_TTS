@@ -23,7 +23,7 @@
       "matches": [ "<all_urls>" ],
       "all_frames": true,
       //"exclude_matches" : [""],   //Permet de spécifier les fichiers sur lesquels on ne veut pas que l'extension soit implémentée
-      "js": ["script/responsivevoice.min.js", "script/jquery.js", "script/css.js",  "script/background.js", "script/script.js"],
+      "js": ["script/responsivevoice.min.js", "script/jquery.js", "script/css.js",  "script/background.js", "script/annyang.min.js", "script/script.js"],
       "css": ["css/style.css"]
     }
   ],
