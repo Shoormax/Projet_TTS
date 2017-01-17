@@ -72,6 +72,13 @@ $(function () {
                 active($(this));
             });
 
+            $('html').mouseup(function() {
+                var text = getSelectedText();
+                if (text!=''){
+                    readMessage(text);
+                }
+            });  
+            
             $('body a').click(function (event) {
                 event.preventDefault(); // empêche la redirection du lien
                 active($(this));
