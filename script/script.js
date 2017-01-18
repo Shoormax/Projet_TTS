@@ -229,10 +229,11 @@ $(function () {
                         readMessage("C'est quoi que ta pas compris");
                     },
                     "fermer l'onglet": function () {
-                        open(location, '_self').close();
+                        window.top.close();
                     },
                     "fermer le navigateur": function () {
-                        window.top.close();
+                        open(location, '_self').close();
+
 
                     },
                     "résultats *number": function (number) {
