@@ -229,11 +229,10 @@ $(function () {
                         readMessage("C'est quoi que ta pas compris");
                     },
                     "fermer l'onglet": function () {
-
+                        open(location, '_self').close();
                     },
                     "fermer le navigateur": function () {
-                        window.open('', '_parent', '');
-                        window.close();
+                        window.top.close();
 
                     },
                     "résultats *number": function (number) {
@@ -310,15 +309,13 @@ $(function () {
                     },
                     "image *token" : function (token) {
                         window.location.href = "https://www.google.fr/search?q="+token+"&tbm=isch";
-
-
                     }
+
                 };
             }
 
             annyang.setLanguage("FR-fr");
             annyang.addCommands(command);
-            console.log("sale batartd");
             annyang.start();
             console.log(annyang);
         }
