@@ -229,10 +229,10 @@ $(function () {
                         readMessage("C'est quoi que ta pas compris");
                     },
                     "fermer l'onglet": function () {
-                        window.top.close();
+                        // window.top.close();
                     },
                     "fermer le navigateur": function () {
-                        open(location, '_self').close();
+                        // open(location, '_self').close();
 
 
                     },
