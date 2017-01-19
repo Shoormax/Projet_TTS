@@ -7,7 +7,8 @@
     "http://*/*",
     "https://*/*",
     "system.storage",
-    "sessions"
+    "sessions",
+    "activeTab"
   ],
   "browser_action": {                               // Les paramètres
     "default_popup": "html/popup.html"              // Le popup qui s'affichera quand vous cliquez sur l'îcone
@@ -20,10 +21,10 @@
   },
   "content_scripts": [
     {
-      "matches": [ "<all_urls>" ],
+      "matches": ["http://*/*", "https://*/*" ],
       "all_frames": true,
       //"exclude_matches" : [""],   //Permet de spécifier les fichiers sur lesquels on ne veut pas que l'extension soit implémentée
-      "js": ["script/responsivevoice.min.js", "script/jquery.js", "script/css.js",  "script/background.js", "script/annyang.min.js", "script/script.js"],
+      "js": ["script/responsivevoice.min.js", "script/jquery.js", "script/css.js",  "script/background.js", "script/annyang.min.js", "script/tools.js", "script/controleVocal.js", "script/script.js"],
       "css": ["css/style.css"]
     }
   ],
