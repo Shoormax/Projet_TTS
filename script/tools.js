@@ -88,8 +88,10 @@ function getSelectedText()
 /**
  * Permet de lire un message et d'effectuer les vérification necessaires
  * @param message
+ * @param noalert
  */
 function readMessage(message, noalert){
+    noalert = typeof noalert == "undefined" ? true : noalert;
     if(typeof message != "undefined" && message != '') {
         if(existe(sessionStorage.getItem("lectureVocale"))) {
             responsiveVoice.speak(message, 'French Female');

@@ -13,11 +13,17 @@ $(function () {
         $('#controleVocal').prop('checked', cocheCheckBox(sessionStorage.getItem('controleVocal')));
         $('#affichageImages').prop('checked', cocheCheckBox(sessionStorage.getItem('affichageImages')));
         $('#isDyslexic').prop('checked', cocheCheckBox(sessionStorage.getItem('isDyslexic')));
+        $('#selectFontFamily').val(verifExist(sessionStorage.getItem('fontFamily'), 'Arial'));
+        $('#selectFontColor').val(verifExist(sessionStorage.getItem('fontColor'), "#000"));
         changeCheckBox(profil != 3);
     }
     else {
         $('#cbPerso').prop('checked', true);
     }
+
+    $('#selectFontColor').find('option').each(function(){
+        $(this).css('color', $(this).val());
+    })
 });
 
 $('#cbNonVoyant').click(function () {
@@ -33,6 +39,7 @@ $('#cbMalVoyant').click(function () {
     $('#controleVocal').prop('checked', '');
     $('#affichageImages').prop('checked', 'checked');
     $('#isDyslexic').prop('checked', cocheCheckBox(sessionStorage.getItem('isDyslexic')));
+    $('#selectFontFamily').val(verifExist(sessionStorage.getItem('fontFamily'), 'Arial'));
     changeCheckBox(true);
 });
 
@@ -41,6 +48,7 @@ $('#cbPerso').click(function () {
     $('#controleVocal').prop('checked', cocheCheckBox(sessionStorage.getItem('controleVocal')));
     $('#affichageImages').prop('checked', cocheCheckBox(sessionStorage.getItem('affichageImages')));
     $('#isDyslexic').prop('checked', cocheCheckBox(sessionStorage.getItem('isDyslexic')));
+    $('#selectFontFamily').val(verifExist(sessionStorage.getItem('fontFamily'), 'Arial'));
     changeCheckBox(false);
 });
 
@@ -58,6 +66,7 @@ function changeCheckBox(disabled) {
 /**
  * Permet d'enregistrer les propriétés choisies
  */
+ 
 $('#btnSave').click(function () {
     var profil = 3;
     if($('#cbNonVoyant').is(':checked')) {
@@ -93,6 +102,8 @@ function setStorage(profil) {
         sessionStorage.setItem("affichageImages", true);
         sessionStorage.setItem("isDyslexic", $('#isDyslexic').is(':checked'));
         sessionStorage.setItem("profil", profil);
+        sessionStorage.setItem("fontFamily", $("#selectFontFamily").val());
+        sessionStorage.setItem("fontColor", $("#selectFontColor").val());
     }
     else {
         sessionStorage.setItem("lectureVocale", $('#lectureVocale').is(':checked'));
@@ -100,6 +111,8 @@ function setStorage(profil) {
         sessionStorage.setItem("affichageImages", $('#affichageImages').is(':checked'));
         sessionStorage.setItem("isDyslexic", $('#isDyslexic').is(':checked'));
         sessionStorage.setItem("profil", profil);
+        sessionStorage.setItem("fontFamily", $("#selectFontFamily").val());
+        sessionStorage.setItem("fontColor", $("#selectFontColor").val());
     }
 }
 
@@ -113,7 +126,9 @@ function getStorage() {
         'lectureVocale' : sessionStorage.getItem("lectureVocale"),
         'controleVocal' : sessionStorage.getItem("controleVocal"),
         'affichageImages' : sessionStorage.getItem("affichageImages"),
-        'isDyslexic' : sessionStorage.getItem("isDyslexic")
+        'isDyslexic' : sessionStorage.getItem("isDyslexic"),
+        'fontFamily' : sessionStorage.getItem("fontFamily"),
+        'fontColor' : sessionStorage.getItem("fontColor")
     };
 }
 

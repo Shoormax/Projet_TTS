@@ -38,67 +38,9 @@ function controleVocale() {
 
                 number = parseInt(number);
 
-                switch(number){
-                    case 0:
-                        window.location.href=document.getElementsByClassName('r')[0].children[0].getAttribute('href');
-                        annyangChargementPage();
-                        onload.readMessage($(document).attr('title'));
-                        break;
-                    case 2:
-                        window.location.href=document.getElementsByClassName('r')[1].children[0].getAttribute('href');
-                        annyangChargementPage();
-                        onload.readMessage($(document).attr('title'));
-                        break;
-                    case 3:
-                        window.location.href=document.getElementsByClassName('r')[2].children[0].getAttribute('href');
-                        annyangChargementPage();
-                        onload.readMessage($(document).attr('title'));
-                        break;
-                    case 4:window.location.href=document.getElementsByClassName('r')[3].children[0].getAttribute('href');
-                        annyangChargementPage();
-                        onload.readMessage($(document).attr('title'));
-                        break;
-                    case 5:
-                        window.location.href=document.getElementsByClassName('r')[4].children[0].getAttribute('href');
-                        annyangChargementPage();
-                        onload.readMessage($(document).attr('title'));
-                        break;
-                    case 6:
-                        window.location.href=document.getElementsByClassName('r')[5].children[0].getAttribute('href');
-                        annyangChargementPage();
-                        onload.readMessage($(document).attr('title'));
-                        break;
-                    case 7:
-                        window.location.href=document.getElementsByClassName('r')[6].children[0].getAttribute('href');
-                        annyangChargementPage();
-                        onload.readMessage($(document).attr('title'));
-                        break;
-                    case 8:
-                        window.location.href=document.getElementsByClassName('r')[7].children[0].getAttribute('href');
-                        annyangChargementPage();
-                        onload.readMessage($(document).attr('title'));
-                        break;
-                    case 9:
-                        window.location.href=document.getElementsByClassName('r')[8].children[0].getAttribute('href');
-                        annyangChargementPage();
-                        onload.readMessage($(document).attr('title'));
-                        break;
-                    case 10:
-                        window.location.href=document.getElementsByClassName('r')[9].children[0].getAttribute('href');
-                        annyangChargementPage();
-                        onload.readMessage($(document).attr('title'));
-                        break;
-                    case 11:
-                        window.location.href=document.getElementsByClassName('r')[10].children[0].getAttribute('href');
-                        annyangChargementPage();
-                        onload.readMessage($(document).attr('title'));
-                        break;
-                    case 12:
-                        window.location.href=document.getElementsByClassName('r')[11].children[0].getAttribute('href');
-                        annyangChargementPage();
-                        onload.readMessage($(document).attr('title'));
-                        break;
-                }
+                window.location.href=document.getElementsByClassName('r')[number - 1].children[0].getAttribute('href');
+                annyangChargementPage();
+                onload.readMessage($(document).attr('title'));
             },
             "nombre de résultats" : function () {
                 var nb_elt = document.getElementsByClassName('r').length
@@ -106,6 +48,11 @@ function controleVocale() {
             },
             "image *token" : function (token) {
                 window.location.href = "https://www.google.fr/search?q="+token+"&tbm=isch";
+            },
+            "relecture" : function () {
+                var msg = $(':focus').val();
+                if (typeof msg != 'undefined' && msg != '')
+                    readMessage("Vous avez écrit : " + msg, false);
             }
 
         };
