@@ -65,20 +65,27 @@
         </div>
         <span class="describConfig">Mode dyslexique</span>
     </div>
-    <select id="selectFontFamily">
-        <option value="Arial">Arial</option>
-        <option value="Segoe UI">Segoe UI</option>
-        <option value="Helvetica">Helvetica</option>
-        <option value="fantasy">fantasy</option>
-        <option value="Roboto">Roboto</option>
-    </select>
 
-    <select name="" id="selectFontColor">
-        <option value="#000">Noir</option>
-        <option value="#013ADF">Bleu</option>
-        <option value="#F00">Rouge</option>
-        <option value="#12F400">Vert</option>
-    </select>
+    <label class="labelSelect" for="selectFontFamily">Choisir une police :</label>
+    <div class="styled-select blue semi-square">
+        <select id="selectFontFamily">
+            <option value="Arial">Arial</option>
+            <option value="Segoe UI">Segoe UI</option>
+            <option value="Helvetica">Helvetica</option>
+            <option value="fantasy">fantasy</option>
+            <option value="Roboto">Roboto</option>
+        </select>
+    </div>
+
+    <label class="labelSelect" for="selectFontColor">Choisir une couleur de police :</label>
+    <div class="styled-select blue semi-square">
+        <select id="selectFontColor">
+            <option value="#000">Noir</option>
+            <option value="#013ADF">Bleu</option>
+            <option value="#F00">Rouge</option>
+            <option value="#12F400">Vert</option>
+        </select>
+    </div>
 
     <button id="btnSave">Enregistrer les paramètres</button>
 </div>

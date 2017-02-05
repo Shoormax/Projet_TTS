@@ -233,3 +233,43 @@ input[type=radio]:checked ~ label{
     color: white;
     font-weight:400;
 }
+
+/** SELECT **/
+.styled-select {
+    margin: 5px 0 20px 40px;
+    background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+    height: 29px;
+    overflow: hidden;
+    width: 240px;
+}
+
+.styled-select select {
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    height: 29px;
+    padding: 5px;
+    width: 255px;
+}
+
+.semi-square {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.blue {
+    background-color: tomato;
+}
+.blue select {
+    color: black;
+}
+
+.labelSelect {
+    font-weight: 300;
+    font-size: 1.35em;
+    margin-left: 40px;
+    margin-bottom: 20px;
+}
+
+/** FIN SELECT **/
