@@ -31,7 +31,6 @@ function getFontColor()
     {
         fontColor = 'color: ' + sessionStorage.getItem('fontColor') + ' !important;';
     }
-    console.log(fontColor);
     return fontColor;
 }
 

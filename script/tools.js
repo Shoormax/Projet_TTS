@@ -101,3 +101,9 @@ function readMessage(message, noalert){
         }
     }
 }
+
+function add_element_to_body(element)                             
+{                                
+     var body = document.getElementsByTagName("body")[0];
+     body.appendChild(element);                             
+}

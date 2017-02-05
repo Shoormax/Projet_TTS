@@ -20,12 +20,14 @@ $(function () {
         var lastDomElement = null;
         if(existe(sessionStorage.getItem("lectureVocale")))
         {
-            function active(domElement){
+            function active(domElement) {
                 domElement.addClass("active");
-                if(lastDomElement != null){
+
+                if(lastDomElement != null) {
                     lastDomElement.removeClass('active');
                     responsiveVoice.cancel();
                 }
+
                 lastDomElement = domElement;
                 messageGenerator(domElement);
             }
@@ -70,7 +72,7 @@ $(function () {
 
             $('html').mouseup(function() {
                 var text = getSelectedText();
-                if (text!=''){
+                if (text != ''){
                     readMessage(text);
                 }
             });
@@ -153,5 +155,34 @@ $(function () {
             $(window).on('beforeunload', annyangChargementPage());
             controleVocale();
         }
+
+        function createZoomButton() {
+            var div = document.createElement("div");
+            div.id = 'containerZoomBtn';
+            var zoomIn = document.createElement("button");
+            zoomIn.id = "zoomInBrowser";
+            zoomIn.className = "btnZoomBrowser";
+            zoomIn.innerHTML = '+';
+    
+            div.appendChild(zoomIn);
+
+            var zoomOut = document.createElement("button");
+            zoomOut.id = "zoomOutBrowser";
+            zoomOut.className = "btnZoomBrowser";
+            zoomOut.innerHTML = '-';        
+    
+            div.appendChild(zoomOut);
+
+            add_element_to_body(div);
+        }
+
+        createZoomButton();
+
+        var taille = 1;
+
+        $('.btnZoomBrowser').click(function() {
+            taille = $(this).html() == '+' ? taille + 0.01 : taille - 0.01;
+            $('*').css('font-size', taille+'em');
+        })
     }
 });

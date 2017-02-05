@@ -1,5 +1,40 @@
-.active{
+.active {
     padding: 3px;
     border: solid 2px red;
     border-radius : 3px;
+}
+
+.btnZoomBrowser {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    border: none;
+    color: white;
+    font-size: 2em !important;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+#containerZoomBtn {
+    width: 20px;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 45%;
+    display: flex;
+    flex-direction: column;
+}
+
+#zoomInBrowser {
+    background-color: blue;
+    margin-bottom: 20px;
+}
+
+#zoomOutBrowser {
+    background-color: red;
+}
+
+#containerZoomBtn:hover {
+    width: 50px;
+    right: 0.5%;
 }
