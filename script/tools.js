@@ -39,7 +39,7 @@ function existe(variable, defaultVal)
         variable = $.parseJSON(variable);
     }
     else if(typeof variable == "undefined") {
-        return true;
+        return defaultVal;
     }
 
     if(typeof defaultVal == 'undefined') {

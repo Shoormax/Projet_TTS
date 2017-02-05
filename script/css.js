@@ -27,7 +27,7 @@ function loadCss()
 function getFontColor()
 {
     var fontColor = '';
-    if (typeof sessionStorage.getItem('fontColor') != 'undefined' && sessionStorage.getItem('fontColor') != null)
+    if (typeof sessionStorage.getItem('fontColor') != 'undefined' && sessionStorage.getItem('fontColor') != null && sessionStorage.getItem('fontColor') != '')
     {
         fontColor = 'color: ' + sessionStorage.getItem('fontColor') + ' !important;';
     }
@@ -41,7 +41,7 @@ function getFontFamily()
     if($.parseJSON(sessionStorage.getItem('isDyslexic'))) {
         fontFamily = 'font-family: '+"OpenDyslexic-Regular"+'!important;';
     }
-    else if (typeof sessionStorage.getItem('fontFamily') != 'undefined' && sessionStorage.getItem('fontFamily') != null) {
+    else if (typeof sessionStorage.getItem('fontFamily') != 'undefined' && sessionStorage.getItem('fontFamily') != null && sessionStorage.getItem('fontFamily') != '') {
         fontFamily = 'font-family: '+ sessionStorage.getItem('fontFamily')+' !important;';
     }
     return fontFamily;

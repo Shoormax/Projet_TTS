@@ -43,5 +43,6 @@
 #spanZoomBrowser {
     width: 50px;
     margin: 2px 0 2px 0;
-    font-family: "Segoe UI";
+    font-family: "Segoe UI", sans-serif;
+    cursor: pointer;
 }
