@@ -163,8 +163,13 @@ $(function () {
             zoomIn.id = "zoomInBrowser";
             zoomIn.className = "btnZoomBrowser";
             zoomIn.innerHTML = '+';
-    
+
             div.appendChild(zoomIn);
+
+            var spanZoom = document.createElement("span");
+            spanZoom.id = 'spanZoomBrowser';
+            spanZoom.innerHTML = '100%';
+            div.appendChild(spanZoom);
 
             var zoomOut = document.createElement("button");
             zoomOut.id = "zoomOutBrowser";
@@ -182,7 +187,8 @@ $(function () {
 
         $('.btnZoomBrowser').click(function() {
             taille = $(this).html() == '+' ? taille + 0.01 : taille - 0.01;
-            $('*').css('font-size', taille+'em');
+            $('html').css('font-size', taille+'em');
+            $('#spanZoomBrowser').html(taille*100+'%');
         })
     }
 });

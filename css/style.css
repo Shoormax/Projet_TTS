@@ -9,13 +9,15 @@
     height: 50px;
     border-radius: 25px;
     border: none;
-    color: white;
+    color: white !important;;
     font-size: 2em !important;
+    font-family: Arial, sans-serif !important;
     font-weight: 300;
     cursor: pointer;
 }
 
 #containerZoomBtn {
+    text-align: center;
     width: 20px;
     overflow: hidden;
     position: absolute;
@@ -27,7 +29,6 @@
 
 #zoomInBrowser {
     background-color: blue;
-    margin-bottom: 20px;
 }
 
 #zoomOutBrowser {
@@ -37,4 +38,10 @@
 #containerZoomBtn:hover {
     width: 50px;
     right: 0.5%;
+}
+
+#spanZoomBrowser {
+    width: 50px;
+    margin: 2px 0 2px 0;
+    font-family: "Segoe UI";
 }
