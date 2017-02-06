@@ -1,4 +1,5 @@
-$(document).ready(function() {
+function getProps() {
+    console.log('a');
     $.ajax({
         type: "POST",
         url : "https://monquartierconfluence.labo-g4.fr/extensionG4.php",
@@ -26,7 +27,25 @@ $(document).ready(function() {
             console.log(data);
         }
     });
+}
 
+function getPropsOnVisibilityChange()
+{
+    if(!document[hidden]) {
+        getProps();
+    }
+}
+
+var hidden, visibilityChange;
+if (typeof document.hidden !== "undefined") {
+    hidden = "hidden";
+    visibilityChange = "visibilitychange";
+}
+
+document.addEventListener(visibilityChange, getPropsOnVisibilityChange, false);
+
+$(document).ready(function() {
+    getProps();
     if(existe(sessionStorage.getItem("active")) || sessionStorage.getItem("active") === null) {
         loadCss();      //load les éléments css grâce au JS afin de modifier dynamiquement les propriétés
 
