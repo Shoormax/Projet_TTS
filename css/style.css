@@ -20,7 +20,7 @@
     text-align: center;
     width: 20px;
     overflow: hidden;
-    position: absolute;
+    position: fixed;
     right: 0;
     top: 45%;
     display: flex;

@@ -13,7 +13,6 @@ function controleVocale() {
         var command = {
             "recherche *key": function (key) {
                 window.location.href = "https://www.google.fr/search?q=" + key;
-                console.log(key);
                 readMessage("recherche google " + key);
                 annyangChargementPage();
 

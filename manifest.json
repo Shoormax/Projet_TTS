@@ -8,7 +8,10 @@
     "https://*/*",
     "system.storage",
     "sessions",
-    "activeTab"
+    "activeTab",
+    "storage",
+    "cookies",
+    "<all_urls>"
   ],
   "browser_action": {                               // Les paramètres
     "default_popup": "html/popup.html"              // Le popup qui s'affichera quand vous cliquez sur l'îcone

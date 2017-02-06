@@ -5,12 +5,16 @@
  */
 function setStorageParams(params)
 {
-    Object.keys(params).map(function(key, index) {
-        var val = params[key];
-        for(var i in val) {
-            sessionStorage.setItem(i, val[i]);
+    var reload = false;
+    for(var i in params) {
+        if(typeof sessionStorage[i] != "undefined" && sessionStorage[i] !=  params[i]) {
+            reload = true;
         }
-    });
+        sessionStorage.setItem(i, params[i]);
+    }
+    if(reload) {
+        location.reload();
+    }
 }
 
 /**
@@ -35,17 +39,16 @@ function verifVal(variable, defaultVal)
  */
 function existe(variable, defaultVal)
 {
+    if(typeof defaultVal == 'undefined') {
+        defaultVal =  true;
+    }
+
     if(variable == 'false' || variable == 'true') {
         variable = $.parseJSON(variable);
     }
     else if(typeof variable == "undefined") {
         return defaultVal;
     }
-
-    if(typeof defaultVal == 'undefined') {
-        defaultVal =  true;
-    }
-
     return variable == defaultVal;
 }
 

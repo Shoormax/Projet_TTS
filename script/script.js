@@ -1,20 +1,33 @@
-var myPort = chrome.runtime.connect({name:"port-from-cs"});
-
-myPort.onMessage.addListener(function(m) {
-    setStorageParams(m);
-});
-
-$(function () {
-    chrome.runtime.onMessage.addListener(
-        function (request, sender, sendResponse) {
-            sessionStorage.setItem("active", request.data);
-            location.reload();
+$(document).ready(function() {
+    $.ajax({
+        type: "POST",
+        url : "https://monquartierconfluence.labo-g4.fr/extensionG4.php",
+        data: {page: 'script'},
+        crossDomain: true,
+        dataType: "json",
+        cache: false,
+        asyn: false,
+        success: function (data) {
+            if(data.status != 1) {
+                console.log(data);
+            }
+            else {
+                setStorageParams(data.data);
+                if(existe(sessionStorage.getItem("active") || sessionStorage.getItem("active") === null)) {
+                    setTimeout(function () {
+                        if(existe(data['data']['lectureVocale'])) {
+                            readMessage(data.message, false);
+                        }
+                    },150)
+                }
+            }
+        },
+        error: function (data) {
+            console.log(data);
         }
-    );
+    });
 
-    var isActive = existe(sessionStorage.getItem("active"));
-
-    if(isActive || sessionStorage.getItem("active") === null) {
+    if(existe(sessionStorage.getItem("active")) || sessionStorage.getItem("active") === null) {
         loadCss();      //load les éléments css grâce au JS afin de modifier dynamiquement les propriétés
 
         var lastDomElement = null;

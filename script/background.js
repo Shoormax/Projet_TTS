@@ -2,19 +2,19 @@
  * Fichier d'options et de paramétrage
  */
 $(function () {
-    var profil = parseInt(sessionStorage.getItem('profil'));
+    var profil = parseInt(localStorage.getItem('profil'));
     if(profil != null && profil != 'undefined' && !isNaN(profil)) {
 
         $('#cbNonVoyant').prop('checked', profil == 1);
         $('#cbMalVoyant').prop('checked', profil == 2);
         $('#cbPerso').prop('checked', profil == 3);
 
-        $('#lectureVocale').prop('checked', cocheCheckBox(sessionStorage.getItem('lectureVocale')));
-        $('#controleVocal').prop('checked', cocheCheckBox(sessionStorage.getItem('controleVocal')));
-        $('#affichageImages').prop('checked', cocheCheckBox(sessionStorage.getItem('affichageImages')));
-        $('#isDyslexic').prop('checked', cocheCheckBox(sessionStorage.getItem('isDyslexic')));
-        $('#selectFontFamily').val(verifExist(sessionStorage.getItem('fontFamily'), 'Arial'));
-        $('#selectFontColor').val(verifExist(sessionStorage.getItem('fontColor'), "#000"));
+        $('#lectureVocale').prop('checked', cocheCheckBox(localStorage.getItem('lectureVocale')));
+        $('#controleVocal').prop('checked', cocheCheckBox(localStorage.getItem('controleVocal')));
+        $('#affichageImages').prop('checked', cocheCheckBox(localStorage.getItem('affichageImages')));
+        $('#isDyslexic').prop('checked', cocheCheckBox(localStorage.getItem('isDyslexic')));
+        $('#selectFontFamily').val(verifExist(localStorage.getItem('fontFamily'), 'Arial'));
+        $('#selectFontColor').val(verifExist(localStorage.getItem('fontColor'), "#000"));
         changeCheckBox(profil != 3);
     }
     else {
@@ -30,7 +30,7 @@ $('#cbNonVoyant').click(function () {
     $('#lectureVocale').prop('checked', 'checked');
     $('#controleVocal').prop('checked', 'checked');
     $('#affichageImages').prop('checked', '');
-    $('#isDyslexic').prop('checked', cocheCheckBox(sessionStorage.getItem('isDyslexic')));
+    $('#isDyslexic').prop('checked', cocheCheckBox(localStorage.getItem('isDyslexic')));
     changeCheckBox(true);
 });
 
@@ -38,17 +38,17 @@ $('#cbMalVoyant').click(function () {
     $('#lectureVocale').prop('checked', '');
     $('#controleVocal').prop('checked', '');
     $('#affichageImages').prop('checked', 'checked');
-    $('#isDyslexic').prop('checked', cocheCheckBox(sessionStorage.getItem('isDyslexic')));
-    $('#selectFontFamily').val(verifExist(sessionStorage.getItem('fontFamily'), 'Arial'));
+    $('#isDyslexic').prop('checked', cocheCheckBox(localStorage.getItem('isDyslexic')));
+    $('#selectFontFamily').val(verifExist(localStorage.getItem('fontFamily'), 'Arial'));
     changeCheckBox(true);
 });
 
 $('#cbPerso').click(function () {
-    $('#lectureVocale').prop('checked', cocheCheckBox(sessionStorage.getItem('lectureVocale')));
-    $('#controleVocal').prop('checked', cocheCheckBox(sessionStorage.getItem('controleVocal')));
-    $('#affichageImages').prop('checked', cocheCheckBox(sessionStorage.getItem('affichageImages')));
-    $('#isDyslexic').prop('checked', cocheCheckBox(sessionStorage.getItem('isDyslexic')));
-    $('#selectFontFamily').val(verifExist(sessionStorage.getItem('fontFamily'), 'Arial'));
+    $('#lectureVocale').prop('checked', cocheCheckBox(localStorage.getItem('lectureVocale')));
+    $('#controleVocal').prop('checked', cocheCheckBox(localStorage.getItem('controleVocal')));
+    $('#affichageImages').prop('checked', cocheCheckBox(localStorage.getItem('affichageImages')));
+    $('#isDyslexic').prop('checked', cocheCheckBox(localStorage.getItem('isDyslexic')));
+    $('#selectFontFamily').val(verifExist(localStorage.getItem('fontFamily'), 'Arial'));
     changeCheckBox(false);
 });
 
@@ -66,7 +66,7 @@ function changeCheckBox(disabled) {
 /**
  * Permet d'enregistrer les propriétés choisies
  */
- 
+
 $('#btnSave').click(function () {
     var profil = 3;
     if($('#cbNonVoyant').is(':checked')) {
@@ -77,10 +77,24 @@ $('#btnSave').click(function () {
     }
 
     setStorage(profil);
-    portFromCS.postMessage({params: getStorage()});
-    setTimeout(function () {
-        location.reload();
-    }, 100);
+
+    $.ajax({
+        type: "POST",
+        url : "http://monquartierconfluence.labo-g4.fr/extensionG4.php",
+        data: {page: 'background', params: getStorage()},
+        crossDomain: true,
+        dataType: "json",
+        cache: false,
+        asyn: false,
+        success: function (data) {
+            if(data.status != 1) {
+                console.log(data.message);
+            }
+        },
+        error: function (data) {
+            console.log(data.message);
+        }
+    });
 });
 
 /**
@@ -90,29 +104,29 @@ $('#btnSave').click(function () {
  */
 function setStorage(profil) {
     if(profil == 1) {
-        sessionStorage.setItem("lectureVocale", true);
-        sessionStorage.setItem("controleVocal", true);
-        sessionStorage.setItem("affichageImages", false);
-        sessionStorage.setItem("isDyslexic", $('#isDyslexic').is(':checked'));
-        sessionStorage.setItem("profil", profil);
+        localStorage.setItem("lectureVocale", true);
+        localStorage.setItem("controleVocal", true);
+        localStorage.setItem("affichageImages", false);
+        localStorage.setItem("isDyslexic", $('#isDyslexic').is(':checked'));
+        localStorage.setItem("profil", profil);
     }
     else if(profil == 2) {
-        sessionStorage.setItem("lectureVocale", false);
-        sessionStorage.setItem("controleVocal", false);
-        sessionStorage.setItem("affichageImages", true);
-        sessionStorage.setItem("isDyslexic", $('#isDyslexic').is(':checked'));
-        sessionStorage.setItem("profil", profil);
-        sessionStorage.setItem("fontFamily", $("#selectFontFamily").val());
-        sessionStorage.setItem("fontColor", $("#selectFontColor").val());
+        localStorage.setItem("lectureVocale", false);
+        localStorage.setItem("controleVocal", false);
+        localStorage.setItem("affichageImages", true);
+        localStorage.setItem("isDyslexic", $('#isDyslexic').is(':checked'));
+        localStorage.setItem("profil", profil);
+        localStorage.setItem("fontFamily", $("#selectFontFamily").val());
+        localStorage.setItem("fontColor", $("#selectFontColor").val());
     }
     else {
-        sessionStorage.setItem("lectureVocale", $('#lectureVocale').is(':checked'));
-        sessionStorage.setItem("controleVocal", $('#controleVocal').is(':checked'));
-        sessionStorage.setItem("affichageImages", $('#affichageImages').is(':checked'));
-        sessionStorage.setItem("isDyslexic", $('#isDyslexic').is(':checked'));
-        sessionStorage.setItem("profil", profil);
-        sessionStorage.setItem("fontFamily", $("#selectFontFamily").val());
-        sessionStorage.setItem("fontColor", $("#selectFontColor").val());
+        localStorage.setItem("lectureVocale", $('#lectureVocale').is(':checked'));
+        localStorage.setItem("controleVocal", $('#controleVocal').is(':checked'));
+        localStorage.setItem("affichageImages", $('#affichageImages').is(':checked'));
+        localStorage.setItem("isDyslexic", $('#isDyslexic').is(':checked'));
+        localStorage.setItem("profil", profil);
+        localStorage.setItem("fontFamily", $("#selectFontFamily").val());
+        localStorage.setItem("fontColor", $("#selectFontColor").val());
     }
 }
 
@@ -123,12 +137,12 @@ function setStorage(profil) {
  */
 function getStorage() {
     return {
-        'lectureVocale' : sessionStorage.getItem("lectureVocale"),
-        'controleVocal' : sessionStorage.getItem("controleVocal"),
-        'affichageImages' : sessionStorage.getItem("affichageImages"),
-        'isDyslexic' : sessionStorage.getItem("isDyslexic"),
-        'fontFamily' : sessionStorage.getItem("fontFamily"),
-        'fontColor' : sessionStorage.getItem("fontColor")
+        'lectureVocale' : localStorage.getItem("lectureVocale"),
+        'controleVocal' : localStorage.getItem("controleVocal"),
+        'affichageImages' : localStorage.getItem("affichageImages"),
+        'isDyslexic' : localStorage.getItem("isDyslexic"),
+        'fontFamily' : localStorage.getItem("fontFamily"),
+        'fontColor' : localStorage.getItem("fontColor")
     };
 }
 
@@ -152,15 +166,3 @@ function cocheCheckBox(variable)
 {
     return variable == 'true' || variable == true ? true : false;
 }
-
-var portFromCS;
-
-/**
- * Permet de se connecter pour envoyer des données
- * @param p
- */
-function connected(p) {
-    portFromCS = p;
-}
-
-chrome.runtime.onConnect.addListener(connected);
