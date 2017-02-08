@@ -63,11 +63,43 @@ function changeCheckBox(disabled) {
     $('#affichageImages').attr('disabled', disabled);
 }
 
-/**
- * Permet d'enregistrer les propriétés choisies
- */
+function createIdUniqueUser(callback)
+{
+    var text = "";
 
-$('#btnSave').click(function () {
+    chrome.cookies.get({name: 'id_browser', url: "https://www.monquartierconfluence.labo-g4.fr"},
+        function(cookie){
+            if(typeof cookie == "undefined" || cookie == "undefined" || cookie == '' || cookie == null || typeof cookie.value == "undefined" || cookie.value == '' || cookie.value == null) {
+                var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+                for( var i=0; i < 25; i++ ) {
+                    text += possible.charAt(Math.floor(Math.random() * possible.length));
+                }
+
+                chrome.cookies.set({
+                    "name": "id_browser",
+                    "url": "https://www.monquartierconfluence.labo-g4.fr/extensionG4.php",
+                    "value": text,
+                    "expirationDate": (new Date().getTime()/1000) + 360000000
+                }, function (cookie) {
+                    // DEBUG
+                    // console.log(JSON.stringify(cookie));
+                    // console.log(chrome.extension.lastError);
+                    // console.log(chrome.runtime.lastError);
+                    callback(cookie);
+                });
+            }
+            else {
+                // DEBUG
+                // console.log(JSON.stringify(cookie));
+                // console.log(chrome.extension.lastError);
+                // console.log(chrome.runtime.lastError);
+                callback(cookie);
+            }
+        });
+}
+
+function printIt(element) {
     var profil = 3;
     if($('#cbNonVoyant').is(':checked')) {
         profil = 1;
@@ -81,7 +113,7 @@ $('#btnSave').click(function () {
     $.ajax({
         type: "POST",
         url : "http://monquartierconfluence.labo-g4.fr/extensionG4.php",
-        data: {page: 'background', params: getStorage()},
+        data: {page: 'background', params: getStorage(), id: JSON.stringify(element.value)},
         crossDomain: true,
         dataType: "json",
         cache: false,
@@ -95,6 +127,12 @@ $('#btnSave').click(function () {
             console.log(data.message);
         }
     });
+}
+/**
+ * Permet d'enregistrer les propriétés choisies
+ */
+$('#btnSave').click(function () {
+    createIdUniqueUser(printIt);
 });
 
 /**
@@ -166,3 +204,4 @@ function cocheCheckBox(variable)
 {
     return variable == 'true' || variable == true ? true : false;
 }
+

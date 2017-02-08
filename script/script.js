@@ -9,6 +9,7 @@ function getProps() {
         cache: false,
         asyn: false,
         success: function (data) {
+            console.log(data);
             if(data.status != 1) {
                 console.log(data);
             }
