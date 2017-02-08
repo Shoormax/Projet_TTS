@@ -1,0 +1,6 @@
+lectureVocale:false
+controleVocal:false
+affichageImages:false
+isDyslexic:false
+fontFamily:
+fontColor:
