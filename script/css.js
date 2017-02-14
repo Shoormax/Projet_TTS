@@ -1,5 +1,5 @@
 /**
- * Méthode permet de créer le css en JS afin de le modifier en récupérant les valeur du localstorage
+ * Méthode permetant de créer le css en JS afin de le modifier en récupérant les valeur du localstorage
  */
 function loadCss()
 {
@@ -13,17 +13,22 @@ function loadCss()
         '#infos_div { background-color: white; }'+
         '.btn { background-image: linear-gradient(to bottom, #3498db, #2980b9); color: #ffffff; font-size: 20px; padding: 10px 20px 10px 20px; text-decoration: none; }'+
         '.btn:hover { background-image: linear-gradient(to bottom, #3cb0fd, #3498db); text-decoration: none; }' +
-        '* { '+ getFontColor() +' '+ getFontFamily() +'}' +
+        '* { '+ getFontColor() +' '+ getFontFamily() +' '+ getZoom() + '}' +
         'a { font-weight: bold !important; color: #100998; text-decoration: underline !important; }'+
         '.alt { font-size: 18px; }' +
-        //Si une image n'a pas de "alt" on rajouter une phrase avec ce css
+        //Si une image n'a pas de "alt" on rajoute une phrase avec ce css
         '.noAlt{ color: #E80001 !important; }' +
         //Edit la sélection de texte de l'utilisateur
-        '::selection {background: #ffb7b7; }';
+        '::selection {background: #ffb7b7; color: black;}';
 
     document.head.appendChild(fa);
 }
 
+/**
+ * Permet, si le paramètre est activé, de changer la couleur du texte
+ *
+ * @returns {string}
+ */
 function getFontColor()
 {
     var fontColor = '';
@@ -34,6 +39,11 @@ function getFontColor()
     return fontColor;
 }
 
+/**
+ * Permet, si le paramètre est activé, de changer la police du texte
+ *
+ * @returns {string}
+ */
 function getFontFamily()
 {
     var fontFamily = '';
@@ -45,4 +55,19 @@ function getFontFamily()
         fontFamily = 'font-family: '+ sessionStorage.getItem('fontFamily')+' !important;';
     }
     return fontFamily;
+}
+
+/**
+ * Permet, si le paramètre est activé, d'augmenter la taille du texte
+ *
+ * @returns {string}
+ */
+function getZoom()
+{
+    var fontSize = '';
+    if (typeof sessionStorage.getItem('zoom') != 'undefined' && sessionStorage.getItem('zoom') != null && sessionStorage.getItem('zoom') != '')
+    {
+        fontSize = 'font-size: ' + sessionStorage.getItem('zoom') + 'em !important;';
+    }
+    return fontSize;
 }

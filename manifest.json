@@ -1,8 +1,8 @@
 {
-  "manifest_version": 2,                          // Indique la version du manifest (toujours 2)
-  "name": "Browser Vision",                       // Le nom de votre extension
-  "description": "Extension Google Chrome pour non-voyants et malvoyants",                     // La description
-  "version": "1.0",                               // La version en en l'occurrence la première donc 1.0
+  "manifest_version": 2,
+  "name": "Browser Vision",
+  "description": "Extension Google Chrome pour non-voyants et malvoyants",
+  "version": "1.0",
   "permissions": [
     "http://*/*",
     "https://*/*",
@@ -13,11 +13,11 @@
     "cookies",
     "<all_urls>"
   ],
-  "browser_action": {                               // Les paramètres
-    "default_popup": "html/popup.html"              // Le popup qui s'affichera quand vous cliquez sur l'îcone
+  "browser_action": {
+    "default_popup": "html/popup.html"
   },
-  "icons": {                                        // L'icone de l'appli
-    "128" : "img/logo_border_128.png"               // 128 = 128x128 la taille de votre image
+  "icons": {
+    "128" : "img/logo_border_128.png"
   },
   "background": {
     "script": ["script/background.js"]
@@ -26,13 +26,12 @@
     {
       "matches": ["http://*/*", "https://*/*" ],
       "all_frames": true,
-      //"exclude_matches" : [""],   //Permet de spécifier les fichiers sur lesquels on ne veut pas que l'extension soit implémentée
       "js": ["script/responsivevoice.min.js", "script/jquery.js", "script/css.js",  "script/background.js", "script/annyang.min.js", "script/tools.js", "script/controleVocal.js", "script/script.js"],
       "css": ["css/style.css"]
     }
   ],
   "web_accessible_resources": [
-    "font/*.*"                                        //Permet d'accéder aux fonts
+    "font/*.*"
   ],
   "options_page": "html/background.html"
 }

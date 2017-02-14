@@ -8,7 +8,6 @@ function getProps() {
         cache: false,
         asyn: false,
         success: function (data) {
-            console.log(data);
             if(data.status != 1) {
                 console.log(data);
             }
@@ -213,7 +212,9 @@ $(document).ready(function() {
             add_element_to_body(div);
         }
 
-        createZoomButton();
+        if(typeof sessionStorage.getItem("zoom") == "undefined" || sessionStorage.getItem("zoom") == "") {
+            createZoomButton();
+        }
 
         var taille = 1;
 

@@ -2,6 +2,10 @@
  * Fichier d'options et de paramétrage
  */
 $(function () {
+    if($('#isDyslexic').is(':checked')) {
+        $('#selectFontFamily').prop('disabled', true);
+    }
+
     var profil = parseInt(localStorage.getItem('profil'));
     if(profil != null && profil != 'undefined' && !isNaN(profil)) {
 
@@ -15,6 +19,7 @@ $(function () {
         $('#isDyslexic').prop('checked', cocheCheckBox(localStorage.getItem('isDyslexic')));
         $('#selectFontFamily').val(verifExist(localStorage.getItem('fontFamily'), 'Arial'));
         $('#selectFontColor').val(verifExist(localStorage.getItem('fontColor'), "#000"));
+        $('#selectZoom').val(verifExist(localStorage.getItem('zoom'), ""));
         changeCheckBox(profil != 3);
     }
     else {
@@ -24,6 +29,10 @@ $(function () {
     $('#selectFontColor').find('option').each(function(){
         $(this).css('color', $(this).val());
     })
+});
+
+$('#isDyslexic').on('change', function(){
+    $('#selectFontFamily').prop('disabled', $('#isDyslexic').is(':checked'));
 });
 
 $('#cbNonVoyant').click(function () {
@@ -156,6 +165,7 @@ function setStorage(profil) {
         localStorage.setItem("profil", profil);
         localStorage.setItem("fontFamily", $("#selectFontFamily").val());
         localStorage.setItem("fontColor", $("#selectFontColor").val());
+        localStorage.setItem("zoom", $("#selectZoom").val());
     }
     else {
         localStorage.setItem("lectureVocale", $('#lectureVocale').is(':checked'));
@@ -165,6 +175,7 @@ function setStorage(profil) {
         localStorage.setItem("profil", profil);
         localStorage.setItem("fontFamily", $("#selectFontFamily").val());
         localStorage.setItem("fontColor", $("#selectFontColor").val());
+        localStorage.setItem("zoom", $("#selectZoom").val());
     }
 }
 
@@ -180,7 +191,8 @@ function getStorage() {
         'affichageImages' : localStorage.getItem("affichageImages"),
         'isDyslexic' : localStorage.getItem("isDyslexic"),
         'fontFamily' : localStorage.getItem("fontFamily"),
-        'fontColor' : localStorage.getItem("fontColor")
+        'fontColor' : localStorage.getItem("fontColor"),
+        'zoom' : localStorage.getItem("zoom")
     };
 }
 
@@ -190,7 +202,6 @@ function getStorage() {
  *
  * @param variable
  * @param defaultVal
- * @param isCheckBox
  * @returns {string|*}
  */
 function verifExist(variable, defaultVal)
@@ -200,6 +211,12 @@ function verifExist(variable, defaultVal)
     return typeof variable == 'undefined' || variable == null || variable == '' ? defaultVal : variable;
 }
 
+/**
+ * Verifie si on doit checker la checkbox de base ou non
+ *
+ * @param variable
+ * @returns {boolean}
+ */
 function cocheCheckBox(variable)
 {
     return variable == 'true' || variable == true ? true : false;
