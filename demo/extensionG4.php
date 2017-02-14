@@ -64,7 +64,7 @@ if(isset($_POST['page']) && !empty($_POST['page'])) {
     }
     elseif($_POST['page'] == "popupConfig") {
         $props = array();
-        if($_POST['active'] === "true" || $_POST['active'] === true) {
+        if($_POST['active'] === "true" || $_POST['active'] === true || $_POST['active'] === "false" || $_POST['active'] === false) {
             $myfile = fopen($fichier, "r") or $erreur = true;
             if(!$erreur) {
                 while (($line = fgets($myfile)) !== false) {

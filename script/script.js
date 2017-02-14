@@ -1,5 +1,4 @@
 function getProps() {
-    console.log('a');
     $.ajax({
         type: "POST",
         url : "https://monquartierconfluence.labo-g4.fr/extensionG4.php",
@@ -219,7 +218,7 @@ $(document).ready(function() {
         var taille = 1;
 
         $('.btnZoomBrowser').click(function() {
-            taille = $(this).html() == '+' ? taille + 0.01 : taille - 0.01;
+            taille = $(this).html() == '+' ? taille + 0.05 : taille - 0.05;
             $('html').css('font-size', taille+'em');
             $('#spanZoomBrowser').html(parseInt(taille*100)+'%');
         });

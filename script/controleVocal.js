@@ -4,10 +4,13 @@ function annyangChargementPage() {
     });
     window.onload = function () {
         annyang.start();
+
     }
 }
 
 function controleVocale() {
+    console.log(annyang);
+    console.log(!annyang);
     annyang.debug();
     if (annyang) {
         var command = {
@@ -29,9 +32,6 @@ function controleVocale() {
             },
             "fermer l'onglet": function () {
                 // window.top.close();
-            },
-            "fermer le navigateur": function () {
-                // open(location, '_self').close();
             },
             "résultats *number": function (number) {
 
