@@ -13,13 +13,6 @@ function getProps() {
             }
             else {
                 setStorageParams(data.data);
-                if(existe(sessionStorage.getItem("active") || sessionStorage.getItem("active") === null)) {
-                    setTimeout(function () {
-                        if(existe(data['data']['lectureVocale'])) {
-                            readMessage(data.message, false);
-                        }
-                    },150)
-                }
             }
         },
         error: function (data) {
